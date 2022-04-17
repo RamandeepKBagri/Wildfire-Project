@@ -1,0 +1,530 @@
+# Title: Wildfire
+
+-   Author: Ramandeep Bagri, Instructor: Prof Kai, Advisor: Yihsu Chen
+
+-   Email: [rbagri\@ucsc.edu](mailto:rbagri@ucsc.edu){.email}
+
+-   About data: Wildfire data Globally, USA, California
+
+**Overview of the complete project**
+
+##### Undoubtedly, we are living in a [climate change]{style="color: red"} era. There is no way to control nature, but we can help blend ourselves by convincing ourselves that we are harming nature. Thus, we want to help the climate change with data when we live in the most advanced technology world since the past century. Therefore, we want to analyze the potential factors exacerbating climate change. One such claim in literature is the production of [electricity]{style="color: purple"} using renewable fuels, highest carbon emissions. Followed by transportation and another is Wildfires. In this analysis, we are focused on [Wildfires,]{style="color: red"} in literature these are caused by many factors. The main focus of this project is to analyze how frequently wildfires occur, their cause and how much destruction is caused by wildfires. Therefore, this [project aims to investigate the wildfire data across the globe]{style="color: blue"}. Further would like to analyze the data of the [U.S.A]{style="color: blue"} and [California]{style="color: blue"}, where wildfires are more frequent. So, this understanding of wildfire data will help us do better wildfire modeling for blending these scenarios as uncertainty is involved in the situation due to climate change.
+
+##### The future scope of the work is that the above data is too small when we want to analyze the destruction caused by wildfires, physically, mentally, emotionally, environment: in terms of air quality as suggested by recent studies where they show that there is a significant relationship between air quality and wildfires. Further, they showed in data a linear relationship between PM2.5 and ozone. Further, we can explore using these wildfire data events and the heat waves data, which will help build on the scope of recent studies and show when there is a wildfire, what relationship or how heat and smoke caused by wildfires impact local PM2.5. Therefore, this will help to understand the destruction and ultimately prevent using better measurements than we have today.
+
+-   *Code source: <https://mikeyharper.uk/flowcharts-in-r-using-diagrammer/>*
+```{r}
+library(DiagrammeR)
+
+DiagrammeR::grViz("digraph {
+
+graph [layout = dot, rankdir = LR]
+
+# define the global styles of the nodes. We can override these in box if we wish
+node [shape = rectangle, style = filled, fillcolor = Linen]
+
+data1 [label = 'Dataset 1 \nBurned Area Globally \n[Source - GFED Data]', shape = folder, fillcolor = Beige]
+
+data2 [label = 'Dataset 2 \nNational Data U.S.A \n[Source: MTPS]', shape = folder, fillcolor = Beige]
+
+data2 [label = 'Dataset 2 \nNational Data U.S.A \n[Source: MTPS]', shape = folder, fillcolor = Beige]
+
+data3 [label = 'Dataset 3 \nCalfire Data California \n[Source: Calfire]', shape = folder, fillcolor = Beige]
+
+process [label =  'Process \n Data for acres burned']
+
+statistical [label = 'Statistical \n Analysis']
+results [label= 'Explore the \nbeautiful graphs [R] and \ndraw conclusion']
+
+# edge definitions with the node IDs
+{data1 data2 data3}  -> process -> statistical -> results
+}")
+```
+### Below data exploration is done for the Calfire Data only 
+```{r}
+getwd()
+```
+
+
+##### Load libraries
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+```
+###check the column names of the data
+```{r}
+names(calFireCompleteData)
+```
+
+### Check the few data points
+```{r}
+head(calFireCompleteData)
+```
+### Read the summarised data 
+```{r}
+calFireCompleteData <- read.csv("mapdataall.csv")
+summary(calFireCompleteData)
+```
+
+```{r}
+cal_dat <- read.csv("calfiredata.txt")
+summary(cal_dat)
+```
+
+```{r}
+new_data <- cal_dat[c(3,2,1)] 
+head(new_data)
+```
+```{r}
+install.packages("raster")
+install.packages("rgdal")
+install.packages("sp")
+```
+
+```{r}
+new_data2 <- calFireCompleteData[c(13,14)] 
+head(new_data2)
+```
+
+```{r}
+new_data2 <- calFireCompleteData[c(13,14)] 
+head(new_data2)
+```
+
+```{r}
+colnames(new_data2) <- c("long", "lat")
+head(new_data2)
+```
+
+```{r}
+write.csv(new_data2,"/Users/rhome/ENVS_Project/ENVS_PROJECT_Rbagri\\coordinates.csv", row.names = FALSE)
+```
+
+#we have coordinate values in our data.frame but in #order to convert our data.frame to a #SpatialPointsDataFrame, we also need to know the CRS #associated with these coordinate values.
+#https://www.neonscience.org/resources/learning-hub/tutorials/dc-csv-shapefile-r
+
+```{r}
+install.packages("raster")
+```
+
+```{r}
+library(maptools)
+library(rgeos)
+library(rgdal)
+```
+
+#https://data.ca.gov/dataset/ca-geographic-boundaries
+
+```{r}
+library(rgdal)
+df_counties <- readOGR("/Users/rhome/ENVS_Project/ENVS_PROJECT_Rbagri/CA_Counties")
+```
+
+```{r}
+library(sf)
+df_county <- st_read("CA_Counties")
+```
+
+```{r}
+head(df_county, n=4)
+```
+
+```{r}
+st_crs(df_county)
+```
+
+```{r}
+library(tmap) 
+tm_shape(df_county) + tm_polygons(col="grey", border.col="white")
+```
+
+```{r}
+library(rgdal)
+library(raster)
+#plot.locations_cal("coordinates.csv", stringsAsFactors = False)
+
+#look at data structure 
+#str(plot.locations_cal)
+
+coordinates(new_data2) <- ~long+lat
+
+```
+
+```{r}
+#sp and rgdal is used to assign and transform CRS in R:
+library(rgdal)
+library(sp)
+```
+
+```{r}
+date <- as.Date(new_data$incident_dateonly_created)
+```
+
+```{r}
+calnewdata <- new_data %>%
+mutate(datenew = as.Date(date, format = "%d.%m.%Y", na.rm = FALSE))
+```
+
+```{r}
+calFireCompleteData1 <- calFireCompleteData %>%
+mutate(datecalfire = as.Date(date, format = "%d.%m.%Y"))
+```
+
+```{r}
+calnewdata <- new_data %>%
+mutate(datenew = as.Date(date, format = "%d.%m.%Y", na.rm = FALSE))
+```
+
+```{r}
+cal_year <- calFireCompleteData1 %>%
+  mutate(yyyy = lubridate::year(datecalfire))
+```
+
+```{r}
+newdata1969 <- cal_year %>%
+  filter(yyyy == 1969) 
+```
+
+```{r}
+newdata1969
+```
+
+```{r}
+newdata13to21 <- cal_year %>%
+ filter(yyyy > 2012)
+```
+
+```{r}
+date <- as.Date(new_data$incident_dateonly_created)
+```
+
+```{r}
+calnewdata <- new_data %>%
+mutate(datenew = as.Date(date, format = "%d.%m.%Y", na.rm = FALSE))
+```
+
+```{r fig.height = 9, fig.width = 18}
+ggplot(newdata13to21, aes(x = datecalfire, y = incident_acres_burned, factor = factor(incident_containment))) +
+  geom_point(shape = 24, color = "red", size = 6) + 
+  ggtitle("Yearly data of wildfire acres burned in California") +
+  xlab("Year") +
+  ylab("Acres burned by each wildfire \n incident, yearly \n (2013-2022) data") +
+  scale_y_log10() +
+  geom_jitter() +
+theme (legend.position="bottom",plot.background = element_rect(fill = "white", color = "black", size = 2),
+#plot.title = element_text(color="black", size=38, face="bold.italic", hjust = 0.5),
+plot.title = element_text(color="black", size=20, hjust = 0.5),
+axis.title.x = element_text(color="black", size=20),
+axis.title.y = element_text(color="black", size=20),
+axis.text.x = element_text(angle=60, vjust=1, hjust=1, size=20, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=20, color="black"))
+#ggsave("plot5.pdf", width = 24, height =10)
+```
+
+```{r}
+calFireCompleteData1 <- calFireCompleteData %>%
+mutate(datecalfire = as.Date(date, format = "%d.%m.%Y"))
+```
+
+```{r}
+calnewdata <- new_data %>%
+mutate(datenew = as.Date(date, format = "%d.%m.%Y", na.rm = FALSE))
+```
+
+```{r}
+cal_year <- calFireCompleteData1 %>%
+  mutate(yyyy = lubridate::year(datecalfire))
+```
+
+```{r}
+newdata1969 <- cal_year %>%
+  filter(yyyy == 1969) 
+```
+
+```{r}
+newdata13to21 <- cal_year %>%
+ filter(yyyy > 2012)
+```
+
+```{r}
+burn_avg <- newdata13to21 %>% 
+  group_by(yyyy, incident_county, incident_containment) %>%
+  summarize(burn_inacres = mean(incident_acres_burned))
+
+burn_avg
+```
+
+```{r}
+burn_avg_yyyy <- newdata13to21 %>% 
+  group_by(yyyy) %>%
+  summarize(burn_inacres = mean(incident_acres_burned, na.rm = TRUE))
+
+burn_avg_yyyy
+```
+
+```{r}
+burn_avg_yyyy1 <-  burn_avg_yyyy %>% mutate(across(where(is.numeric), round, 2))
+```
+
+```{r fig.height = 9, fig.width = 34}
+ggplot(data=burn_avg_yyyy1, aes( yyyy,burn_inacres), label=colnames(burn_inacres)) +   geom_label(aes(label=burn_inacres), size = 18,box.padding = unit(0.45, "lines") ,point.padding = unit(0.7, "lines"))+
+   ggtitle("Average data of Acres burned yearly in California") +
+  xlab("Year") +       
+  ylab("in Acres") +
+   scale_x_continuous(breaks = seq(2013, 2021, 1), limits=c(2013, 2021)) +  
+  theme (legend.position="bottom",plot.background = element_rect(fill = "white", color = "black", size = 2),
+plot.title = element_text(color="black", size=20, hjust = 0.5),
+axis.title.x = element_text(color="black", size=20),
+axis.title.y = element_text(color="black", size=20),
+axis.text.x = element_text(angle=45, vjust=1, hjust=1, size=20, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=20, color="black"))
+#ggsave("plot222.pdf", width = 44, height = 24)
+```
+
+```{r}
+burn_avg_county <- newdata13to21 %>% 
+  group_by(incident_county) %>%
+  summarize(burn_inacres = mean(incident_acres_burned))
+burn_avg_county
+```
+
+```{r}
+burn_avg_county <- newdata13to21 %>% 
+  group_by(incident_county) %>%
+  summarize(burn_inacres = sum(incident_acres_burned))
+burn_avg_county
+```
+
+```{r fig.height = 9, fig.width = 43}
+ggplot(data=burn_avg_county, aes(incident_county,burn_inacres)) +
+  geom_point(shape = 2, colour = "red", fill = "white", size = 5, stroke = 3) +
+  ggtitle("Acres burned due to wildfire in California") +
+  xlab("County, CA, USA") +
+  ylab("Acres burned \n in California") +
+  scale_y_log10() +
+ theme (legend.position="bottom",plot.background = element_rect(fill = "white", color = "black", size = 2),
+plot.title = element_text(color="black", size=20, hjust = 0.5),
+axis.title.x = element_text(color="black", size=20),
+axis.title.y = element_text(color="black", size=20),
+axis.text.x = element_text(angle=90, vjust=1, hjust=1, size=20, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=20, color="black"))
+#ggsave("plot10.pdf", width = 48, height = 26)
+
+```
+
+```{r fig.height = 7, fig.width = 15}
+ggplot(newdata13to21, aes(x=datecalfire, y= incident_acres_burned, group=factor(incident_containment))) +
+  geom_point(aes(shape=factor(incident_containment), color=factor(incident_containment))) +
+  ggtitle("Acres burned, wildfire, California, along with contaiment") +
+  xlab("Yearly data (2013 - 2022), Wildfire, CA, USA") +
+  ylab("Acres burned in each \n year in California, \n along with contaiment") +
+  scale_y_log10()+
+  theme (legend.position="bottom",legend.text = element_text(size=20), plot.background = element_rect(fill = "white", color = "black", size = 2),
+plot.title = element_text(color="black", size=20, hjust = 0.5),
+axis.title.x = element_text(color="black", size=20),
+axis.title.y = element_text(color="black", size=20),
+axis.text.x = element_text(angle=60, vjust=1, hjust=1, size=20, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=20, color="black"))
+#ggsave("plot20.pdf", width = 36, height = 20)
+```
+
+```{r fig.height = 15, fig.width = 15}
+newdata13to21 %>%
+   count(incident_county)
+```
+
+```{r}
+library(ggplot2)
+```
+
+```{r  fig.height = 15, fig.width = 20}
+base <- ggplot(newdata13to21, aes(x = datecalfire, y = incident_acres_burned, color = incident_county)) +
+geom_point(shape = 24, color = "#FC4E07", size = 4, stroke = 2) +
+  ggtitle("Acres burned due to wildfire in California, Yearly (2013 - 2022) Counties data") +
+  xlab("Yearly data, Counties, CA, USA") +
+  ylab("Acres burned in each County in California") +
+scale_y_log10() 
+#facet_wrap(~incident_county) + base + facet_wrap(~class, ncol = 3) facet_wrap(~incident_county, ncol = 15)
+base +  facet_wrap( ~ incident_county, ncol = 11) +
+geom_jitter() +
+theme (strip.text.x = element_text(size = 20), legend.position="none", plot.background = element_rect(fill = "white", color = "black", size = 2),
+plot.title = element_text(color="black", size=04, hjust = 0.5),
+axis.title.x = element_text(color="black", size=24),
+axis.title.y = element_text(color="black", size=24),
+axis.text.x = element_text(angle=60, vjust=1, hjust=1, size=24, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=24, color="black"))
+#ggsave("ploty22.pdf", width = 36, height = 26)
+```
+
+```{r}
+library(tidyverse)
+library(mapdata)
+library(ggplot2)  # The grammar of graphics package
+library(maps)     # Provides latitude and longitude data for various maps
+library(dplyr)    # To assist with cleaning and organizing data
+library(sf)
+library(plotly)
+# load United States state map data
+states <- map_data("state")
+```
+
+```{r}
+#plot all states with ggplot2, using black borders and light blue fill
+ggplot() + 
+  geom_polygon( data=states, aes(x=long, y=lat, group=group),
+                color="black", fill="lightblue" )
+```
+
+```{r}
+stATE_county <- states %>%
+  filter(region == "california")
+counties <- map_data("county")
+CA_county <- subset(counties, region=="california")
+```
+
+```{r}
+ca_base <- ggplot(data = CA_county, mapping = aes(x = long, y = lat, group = group)) + 
+  coord_quickmap() + 
+  geom_polygon(color = "black", fill = "lightblue")
+ca_base + theme_void()
+```
+
+```{r}
+newdata13to21$subregion <- tolower(newdata13to21$incident_county) 
+```
+
+```{r}
+MergedStates <- inner_join( CA_county, newdata13to21, by = "subregion")
+str(MergedStates)
+```
+
+```{r}
+ggplot(data = MergedStates, mapping = aes(x = long, y = lat , fill = region, group = group, na.rm = True)) +
+    geom_polygon(aes(fill = incident_acres_burned, na.rm = TRUE)) + 
+   scale_fill_gradient(trans = "log10") +
+    coord_quickmap() + 
+    labs(title = "Acres burned by counties") 
+```
+
+
+```{r}
+summary(MergedStates$incident_acres_burned)
+```
+
+```{r}
+ c <- MergedStates %>% 
+  summarise(sume = sum(incident_acres_burned, na.rm=TRUE), mean(incident_acres_burned, na.rm=TRUE), n = n(), na.rm=TRUE)
+c
+```
+
+```{r}
+library(epiDisplay)
+```
+
+```{r}
+ tab1(MergedStates$subregion, sort.group = "decreasing", cum.percent = TRUE, alpha = 0.2)
+
+```
+
+```{r}
+library(tidyverse)
+calsubData <- 
+read_table("dataforhist.txt")
+```
+
+```{r}
+summary(calsubData)
+s <- as.numeric(calsubData$Percent, na.rm=TRUE)
+s
+```
+
+```{r}
+ c <- MergedStates %>% 
+  group_by(subregion) %>%
+  summarise(sume = mean(incident_acres_burned, na.rm=TRUE), n = n(), na.rm = TRUE)
+c
+```
+
+```{r}
+fips <- MergedStates %>% 
+  group_by(subregion) %>%
+  summarise(sume = mean(incident_acres_burned, na.rm=TRUE), n = n(), prob = round((n)/105207, 4), na.rm = TRUE)
+fips
+```
+
+```{r}
+library(tidyverse)
+library(sf)
+library(plotly)
+```
+
+
+```{r  width = 14, height =22}
+yy <- ggplot(data = MergedStates, mapping = aes(x = long, y = lat , na.rm = TRUE, fill = region, group = group)) +
+geom_polygon(aes(fill = incident_acres_burned, na.rm = TRUE)) + scale_fill_gradientn(colours = rev(rainbow(7)), breaks = c(2, 4, 10, 100, 1000, 10000), trans = "log10") +
+coord_quickmap() + 
+labs(title = "Range of acres burned \n during Wildfires (Counties Data)") +
+theme (legend.text = element_text(size=20), legend.key.size = unit(1.2, "cm"),
+plot.title = element_text(color="black", size=20, hjust = 0.5),
+axis.title.x = element_text(color="black", size=20),
+axis.title.y = element_text(color="black", size=20),
+axis.text.x = element_text(angle=60, vjust=1, hjust=1, size=20, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=20, color="black"))
+#ggsave("plot136.pdf", width = 24, height = 24)
+yy
+```
+
+```{r  fig.height = 9, fig.width = 15}
+fig <- ggplotly(yy)
+#ggsave("plot17.pdf", width = 20, height = 12)
+fig
+```
+
+```{r  fig.height = 10, fig.width = 20}
+p <- ggplot(MergedStates, aes(x=as.factor(subregion), fill=as.factor(subregion) )) + 
+  geom_bar( ) +
+scale_fill_hue(c = 40) +
+  theme(legend.position="none")+
+  labs(title = "Frequency of wildfire occuring in each county - California", x = "Counties, California", y = "Frequency of \n  the wildfire event") +
+scale_x_discrete() +
+theme (legend.position="none", plot.background = element_rect(fill = "white", color = "black", size = 2),
+plot.title = element_text(color="black", size=36, hjust = 0.5),
+axis.title.x = element_text(color="black", size=36, hjust = 0.5),
+axis.title.y = element_text(color="black", size=36),
+axis.text.x = element_text(angle=90, vjust=0.5, hjust=1, size=28, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=36, color="black"))
+p
+ggsave("ploty95.pdf", width = 20, height = 12)
+```
+
+```{r fig.height = 7, fig.width = 20}
+ggplot(MergedStates, aes(x=as.factor(subregion), fill=as.factor(subregion) )) +
+geom_density(bw = 0.1,
+               aes(group = 1), color = "red") +
+  labs(title = "Frequency of wildfire occuring in each county - California", x = "Counties, California", y = "Frequency of the \n  wildfire event") +
+scale_x_discrete() +
+theme (legend.position="bottom",plot.background = element_rect(fill = "white", color = "black", size = 2),
+plot.title = element_text(color="black", size=36, hjust = 0.5),
+axis.title.x = element_text(color="black", size=36),
+axis.title.y = element_text(color="black", size=36),
+axis.text.x = element_text(angle=90, vjust=0.5, hjust=1, size=30, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=36, color="black"))
+#ggsave("plot91.pdf", width = 24, height = 10)
+```
+
+```{r}
+burn_avg_county2 <- MergedStates %>% 
+  group_by(incident_county) %>%
+  summarize(burn_inacres = sum(incident_acres_burned))
+burn_avg_county2
+```
+
+```{r fig.height = 9, fig.width = 24}
+ggplot(data=burn_avg_county2, aes(incident_county,burn_inacres)) +
+  geom_point(shape = 2, colour = "red", fill = "white", size = 5, stroke = 3) +
+  ggtitle("Acres burned due to wildfire in California") +
+  xlab("County, CA, USA") +
+  ylab("Acres burned \n in California") +
+  scale_y_log10() +
+ theme (legend.position="bottom",plot.background = element_rect(fill = "white", color = "black", size = 2),
+plot.title = element_text(color="black", size=36, hjust = 0.5),
+axis.title.x = element_text(color="black", size=36),
+axis.title.y = element_text(color="black", size=36),
+axis.text.x = element_text(angle=90, vjust=0.5, hjust=1, size=24, color="black"), axis.text.y = element_text(vjust=1, hjust=1, size=36, color="black"))
+#ggsave("plot10.pdf", width = 24, height = 11)
+```
