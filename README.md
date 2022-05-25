@@ -4,19 +4,19 @@ In the past decade, summer wildfires have become the norm in California (CA), Un
 The research project aims to propose the implication of wildfire risk associated with vegetation, and due to power lines and incorporate that in dollars. Therefore, the project helps to solves the problem of collecting wildfire funds associated to each location and incorporate with energy prices to charge their customers according to their wildfire risk related to the location to maximize the social surplus for the society. <\br>
 The first section of the thesis shows the wildfire analysis and determines the risk based on each location (project focus is at California and it’s counties). The proposal will use the previous year’s data to forecast the wildfire risk as the next step to solve the wildfire modeling. Electrical corporations are also taking actions to prevent the wildfires from their system using Public Safety and Power Shutoffs (PSPS) events. The primary purpose of the PSPS event is to de-energize the selected circuits depending on weather data. We are focusing on the PSPS events data to see if the frequency of PSPS events targets the low-income areas in order to avoid customer exploitation due to unrevealed characterization of the location. Therefore, we are using a data-driven approach to maximize the social surplus for the customers and reveal the impact of PSPS strategy on the customers. <\br>
 The second part of the thesis determines the variable wildfire risk associated with each location using an energy pricing strategy that is the location marginal price method. These findings suggest that designing wildfire risk premium using a Risk-based Eco- nomic Dispatch and Location based marginal pricing method gives electrical corpo- rations information to operate the developed methodology. The goal is to collect the wildfire funds based on the customers living at high-risk areas or living at low-risk ar- eas instead of charging all customers almost around $6 uniformly from all customers throughout CA every month. <\br>
-The thesis findings will help to calculate the risk premium involving wildfire risk associated with the location and incorporate the risk into pricing. The research of this submitted proposal provides the potential contribution towards detecting the utilities associated wildfire risk in the power lines, which can prevent wildfires by controlling the line flows of the system. Ultimately, this proposal’s goal is a social benefit to save money for the electrical corporations and their customers in California, who pay ”Wild- fire Fund/charges” each month $5.85/KWH. Therefore, this proposal will propose meth- ods to collect wildfire funds with maximum customer surplus for future generations.
+The thesis findings will help to calculate the risk premium involving wildfire risk associated with the location and incorporate the risk into pricing. The research of this submitted proposal provides the potential contribution towards detecting the utilities associated wildfire risk in the power lines, which can prevent wildfires by controlling the line flows of the system. Ultimately, this proposal’s goal is a social benefit to save money for the electrical corporations and their customers in California, who pay ”Wild- fire Fund/charges” each month $5.85/KWH. Therefore, this proposal will propose meth- ods to collect wildfire funds with maximum customer surplus for future generations. <\br>
 
 ## Advisor(for project): 
-Prof Yihsu Chen, ECE, UCSC. 
+Prof Yihsu Chen, ECE, UCSC. <\br>
 
 ### Resources which were helpful to complete the project
-ECE 275 (UCSC), Energy Market [Source: AMPL code (Reference: ECE 275 lecture slides)]
-ENVS 265 (UCSC), Wildfire Project: Preliminary data (Calfire) exploration
-ENGL 200 (GGU)
-ENGL 201 (GGU)
-MSBA 320 (GGU)
-MSBA 300 (GGU)
-UCSC Extension Certificate: Database and Data analytics 
+ECE 275 (UCSC), Energy Market [Source: AMPL code (Reference: ECE 275 lecture slides)] <\br>
+ENVS 265 (UCSC), Wildfire Project: Preliminary data (Calfire) exploration <\br>
+ENGL 200 (GGU) <\br>
+ENGL 201 (GGU) <\br>
+MSBA 320 (GGU) <\br>
+MSBA 300 (GGU) <\br>
+UCSC Extension Certificate: Database and Data analytics <\br>
 
 ##### Citation: R code is taken from Data camp resources. Debuging is done using stackoverflow website, R community.
 ##### Sincere thank you to Prof Yihsu for his help for the useful conversations on the project topic.
