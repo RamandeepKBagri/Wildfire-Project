@@ -13,8 +13,8 @@ Prof Yihsu Chen, ECE, UCSC
 ```
 ECE 275 (UCSC), Energy Market [Source: AMPL code (Reference: ECE 275 lecture slides)] \
 ENVS 265 (UCSC), Wildfire Project: Preliminary data (Calfire) exploration \
-ECE 279 (UCSC) \
-ENGL 200 (GGU) \
+ECE 279 (UCSC) 
+ENGL 200 (GGU) 
 ENGL 201 (GGU) \
 MSBA 320 (GGU) \
 MSBA 300 (GGU) \
