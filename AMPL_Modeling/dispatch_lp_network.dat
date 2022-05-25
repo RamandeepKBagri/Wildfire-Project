@@ -1,0 +1,30 @@
+set I := a b c d e;			 # nodes;
+#set Ig	:= a1 a2 c d e;	       #nodes with generations
+set K := ab ad ae bc cd de;		# flowgates
+set G := g1 g2; # generators
+
+	
+param cost: a b c d e :=
+g1 	14	0	30	40	20
+g2	15	0	0	0	0;
+param load := a 0 b 300 c 300 d 400 e 0;
+#param risk := a 1   b 0.65 c 0.01;
+param pcap: a b c d e :=
+g1 40 0 520 200 600
+g2 170 0 0 0 0;
+param Kc := 0.50;
+
+         
+param Tcap := ab 400 ad 10000 ae 10000 bc 10000 cd 10000 de 240;
+
+        
+param PTDF:    a		   b         c       d     e    :=
+ab         0.1939       -0.4759   -0.3490   0     0.1595
+ad         0.4376        0.2583    0.1895    0     0.3600
+ae         0.3685         0.2176     0.1595   0    -0.5195
+bc         0.1939         0.5241     -0.3490  0     0.1595
+cd         0.1939         0.5241    0.6510    0     0.1595
+de         -0.3685        -0.2176   -0.1595   0     -0.4805 ;
+
+ 
+

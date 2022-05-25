@@ -1,0 +1,16 @@
+model dispatch_lp_network.mod;
+data dispatch_lp_network.dat;
+
+option solver cplex;
+option display_round 4;
+solve;
+
+
+display y, z, cost, flow, flowcap1.dual; 
+
+display net_injection.dual;
+
+
+
+
+	
