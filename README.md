@@ -9,3 +9,4 @@ Source: AMPL code (Reference: ECE 275 lecture slides)
 
 ##### Citation: R code is taken from Data camp resources. Debuging is done using stackoverflow website, R community.
 ##### Sincere thank you to Prof Yihsu for his help for the useful conversations on the project topic.
+##### Sincere thank you to ENVS265 Prof Kai Zhu, for useful comments on my R code.
