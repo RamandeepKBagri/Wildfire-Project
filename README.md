@@ -7,7 +7,7 @@ The second part of the thesis determines the variable wildfire risk associated w
 The thesis findings will help to calculate the risk premium involving wildfire risk associated with the location and incorporate the risk into pricing. The research of this submitted proposal provides the potential contribution towards detecting the utilities associated wildfire risk in the power lines, which can prevent wildfires by controlling the line flows of the system. Ultimately, this proposal’s goal is a social benefit to save money for the electrical corporations and their customers in California, who pay ”Wildfire Fund charges” each month $5.85/KWH. Therefore, this proposal will propose meth- ods to collect wildfire funds with maximum customer surplus for future generations.\
 
 ## Advisor(for project): 
-Prof Yihsu Chen, ECE, UCSC.\
+Prof Yihsu Chen, ECE, UCSC
 
 ### Resources which were helpful to complete the project
 ECE 275 (UCSC), Energy Market [Source: AMPL code (Reference: ECE 275 lecture slides)] \
@@ -16,7 +16,7 @@ ENGL 200 (GGU) \
 ENGL 201 (GGU) \
 MSBA 320 (GGU) \
 MSBA 300 (GGU) \
-UCSC Extension Certificate: Database and Data analytics \
+UCSC Extension Certificate: Database and Data analytics 
 
 ##### Citation: R code is taken from Data camp resources. Debuging is done using stackoverflow website, R community.
 ##### Sincere thank you to Prof Yihsu for his help for the useful conversations on the project topic.
