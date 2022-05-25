@@ -34,7 +34,7 @@ Sincere thank you to ENVS265 Prof Kai Zhu, for useful comments on my R code.
 
 ###### Future Expectation 
 ```
-Improving the writing code ability while displaying all the comments next to the code.
+Improving the writing code ability while displaying all the comments as well online code reference next to the code.
 ```
 
 ###### Note: 
