@@ -10,13 +10,13 @@ The thesis findings will help to calculate the risk premium involving wildfire r
 Prof Yihsu Chen, ECE, UCSC. <\br>
 
 ### Resources which were helpful to complete the project
-ECE 275 (UCSC), Energy Market [Source: AMPL code (Reference: ECE 275 lecture slides)] <\br>
-ENVS 265 (UCSC), Wildfire Project: Preliminary data (Calfire) exploration <\br>
-ENGL 200 (GGU) <\br>
-ENGL 201 (GGU) <\br>
-MSBA 320 (GGU) <\br>
-MSBA 300 (GGU) <\br>
-UCSC Extension Certificate: Database and Data analytics <\br>
+ECE 275 (UCSC), Energy Market [Source: AMPL code (Reference: ECE 275 lecture slides)] (<-- two spaces)
+ENVS 265 (UCSC), Wildfire Project: Preliminary data (Calfire) exploration (<-- two spaces)
+ENGL 200 (GGU) (<-- two spaces)
+ENGL 201 (GGU) (<-- two spaces)
+MSBA 320 (GGU) (<-- two spaces)
+MSBA 300 (GGU) (<-- two spaces)
+UCSC Extension Certificate: Database and Data analytics (<-- two spaces)
 
 ##### Citation: R code is taken from Data camp resources. Debuging is done using stackoverflow website, R community.
 ##### Sincere thank you to Prof Yihsu for his help for the useful conversations on the project topic.
