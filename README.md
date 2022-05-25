@@ -10,6 +10,7 @@
 Prof Yihsu Chen, ECE, UCSC
 
 ### Resources which were helpful to complete the project
+```
 ECE 275 (UCSC), Energy Market [Source: AMPL code (Reference: ECE 275 lecture slides)] \
 ENVS 265 (UCSC), Wildfire Project: Preliminary data (Calfire) exploration \
 ENGL 200 (GGU) \
@@ -17,16 +18,20 @@ ENGL 201 (GGU) \
 MSBA 320 (GGU) \
 MSBA 300 (GGU) \
 UCSC Extension Certificate: Database and Data analytics 
+```
 
 ##### Citation: 
-R code is taken from Data camp resources. Debuging is done using stackoverflow website, R community.
+```
+R code is taken from Data camp resources. Debuging is done using stackoverflow website, R community.```
 
 ##### Sincere thank you 
+```
 Sincere thank you to Prof Yihsu for his help for the useful conversations on the project topic.
-Sincere thank you to ENVS265 Prof Kai Zhu, for useful comments on my R code.
+Sincere thank you to ENVS265 Prof Kai Zhu, for useful comments on my R code. ```
 
 ###### Future Expectation 
-Improving the writing code ability while displaying all the comments next to the code. 
+```
+Improving the writing code ability while displaying all the comments next to the code.```
 
 ###### Note: 
-This is first version, I will say raw files of the project. These are unpublished results and submitted for the research proposal, which needed more time to polish the work done. As I am MS student, this was my last quarter and I followed my graduation plans and learning some more interesting subjects. Therefore, this code is open for the community to use, if needed and cite the work. 
+``` This is first version, I will say raw files of the project. These are unpublished results and submitted for the research proposal, which needed more time to polish the work done. As I am MS student, this was my last quarter and I followed my graduation plans and learning some more interesting subjects. Therefore, this code is open for the community to use, if needed and cite the work.```
