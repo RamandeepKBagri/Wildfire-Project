@@ -18,6 +18,9 @@ ENGL 200 (GGU)
 ENGL 201 (GGU) 
 MSBA 320 (GGU) 
 MSBA 300 (GGU) 
+MTPS 202 (BBSBEC, PTU)
+MTPS 201 (BBSBEC, PTU)
+MTPS 203 (BBSBEC, PTU)
 UCSC Extension Certificate: Database and Data analytics 
 ```
 
