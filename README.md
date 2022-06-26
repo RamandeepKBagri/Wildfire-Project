@@ -27,7 +27,7 @@ UCSC Extension Certificate: Database and Data analytics
 
 ##### Citation: 
 ```
-Shourya Bose: Helped in debugging the AMPL coding! I appreciate it and acknowledge his help during discussions! 
+Shourya Bose (UCSC, ECE, Phd Student): Helped in debugging the AMPL coding! I appreciate it and acknowledge his help during discussions! 
 R code is taken from Data camp resources. Debuging is done using stackoverflow website, R community.
 ```
 
